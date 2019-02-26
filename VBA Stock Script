@@ -1,0 +1,25 @@
+Sub easy():
+Dim vol As Double
+Dim lastrow As Double
+Dim i As Double
+Dim count As Double
+
+For Each ws In Worksheets
+lastrow = ws.Cells(Rows.count, 1).End(xlUp).Row
+vol = 0
+count = 2
+ws.Range("J1").Value = "Tick"
+ws.Range("K1").Value = "Total Stock Volume"
+For i = 2 To lastrow
+    If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
+    vol = vol + ws.Cells(i, 7).Value
+    ws.Range("J" & count).Value = ws.Cells(i, 1).Value
+    ws.Range("K" & count).Value = vol
+    count = count + 1
+    vol = 0
+    Else
+    vol = vol + ws.Cells(i, 7).Value
+    End If
+Next i
+Next ws
+End Sub
